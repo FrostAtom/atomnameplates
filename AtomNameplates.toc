@@ -1,0 +1,10 @@
+## Interface: 30300
+## Title: Atom Nameplates
+## Author: https://t.me/boredatom
+settings.lua
+totemlist.lua
+events.lua
+nameplate.lua
+castbar.lua
+main.lua
+commands.lua
