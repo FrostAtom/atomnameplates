@@ -119,11 +119,28 @@ function main:OnNameplateCreate(frame)
 		frame.totem = texture
 	end
 
-	-- misc regions
+	-- highlight
 	highlight:SetTexture(1,1,1,0.4)
+
+	-- elite icon
+	elite:ClearAllPoints()
+	elite:SetPoint("CENTER", healthbar, "RIGHT", -8, 0)
+	elite:SetSize(46, 27)
+	elite:SetDesaturated(true)
+
+	-- aggro background
+	threat:SetTexture("Interface\\BUTTONS\\WHITE8x8")
+	threat:ClearAllPoints()
+	threat:SetPoint("TOPRIGHT", healthbar, 2, 2)
+	threat:SetPoint("BOTTOMLEFT", healthbar, -2, -2)
+	threat:SetDrawLayer("BORDER")
+
+	-- misc
 	frame.highlight = highlight
 	frame.level = level
+	frame.elite = elite
 	frame.raidicon = raidicon
+	frame.threat = threat
 
 	-- setup events
 	frame:SetScript("OnShow", frame.OnShow)
@@ -134,9 +151,7 @@ function main:OnNameplateCreate(frame)
 	castbar:SetScript("OnUpdate", castbar.OnUpdate)
 
 	-- remove unneded blizzard regions
-	threat:SetParent(hiddenFrame)
 	bossicon:SetParent(hiddenFrame)
-	elite:SetParent(hiddenFrame)
 	cbborder:SetParent(hiddenFrame)
 	cbshield:SetParent(hiddenFrame)
 

@@ -39,6 +39,12 @@ function prototype:OnUpdate()
 		raidicon:SetAlpha(1)
 	end
 
+	if self.threat:IsShown() then
+		self.newName:SetTextColor(self.threat:GetVertexColor())
+	else
+		self.newName:SetTextColor(1, 0.9, 0.8)
+	end
+
 	if self:GetAlpha() < 1 then
 		self:SetAlpha(66/100)
 	end
