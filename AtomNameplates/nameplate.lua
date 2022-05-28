@@ -4,7 +4,6 @@ local width, height = main.NAMEPLATE_WIDTH, main.NAMEPLATE_HEIGHT
 local totemlist = main.totemlist
 local prototype = {}
 
-
 function prototype:UpdateColors(r, g, b)
 	if g + b == 0 then -- red
 		r, g, b = 0.69, 0.31, 0.31
@@ -29,20 +28,24 @@ function prototype:OnUpdate()
 		self:UpdateColors(r, g, b)
 	end
 
+	local threat = self.threat
 	if self.totem:IsShown() then
 		self.raidicon:SetAlpha(0)
+		self.newName:SetTextColor(1, 0.9, 0.8)
 	else
 		local raidicon = self.raidicon
 		raidicon:SetSize(24, 24)
 		raidicon:ClearAllPoints()
 		raidicon:SetPoint("LEFT", healthbar, "RIGHT", 4, 0)
 		raidicon:SetAlpha(1)
-	end
-
-	if self.threat:IsShown() then
-		self.newName:SetTextColor(self.threat:GetVertexColor())
-	else
-		self.newName:SetTextColor(1, 0.9, 0.8)
+		if threat:IsShown() then
+			local r, g, b = threat:GetVertexColor()
+			self.newName:SetTextColor(r, g, b)
+			healthbar.border:SetTexture(r, g, b)
+		else
+			self.newName:SetTextColor(1, 0.9, 0.8)
+			healthbar.border:SetTexture(.2, .2, .2)
+		end
 	end
 
 	if self:GetAlpha() < 1 then

@@ -18,29 +18,17 @@ function main:OnNameplateCreate(frame)
 		healthbar:SetStatusBarTexture("Interface\\Buttons\\WHITE8x8")
 		frame.healthbar = healthbar
 
-		-- healthbar background
-		local bg = CreateFrame("frame", nil, healthbar)
-		bg:SetFrameLevel(healthbar:GetFrameLevel() - 1)
+		-- healthbar border
+		local bg = healthbar:CreateTexture(nil, "BACKGROUND")
+		bg:SetTexture(.2, .2, .2)
 		bg:SetPoint("TOPRIGHT", 2, 2)
 		bg:SetPoint("BOTTOMLEFT", -2, -2)
-		bg:SetBackdrop({
-			edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
-			edgeSize = 8,
-			bgFile = "Interface\\Buttons\\WHITE8x8",
-			insets = {
-				top = 1,
-				bottom = 1,
-				left = 1,
-				right = 1,
-			}
-		})
-		bg:SetBackdropColor(0.137, 0.137, 0.137)
-		bg:SetBackdropBorderColor(0.2, 0.2, 0.2)
+		healthbar.border = bg
 
-		-- healthbar border
+		-- healthbar background
 		hpborder:SetParent(healthbar)
 		hpborder:SetTexture(0.3, 0.3, 0.3)
-		hpborder:SetDrawLayer("BACKGROUND")
+		hpborder:SetDrawLayer("BORDER")
 		hpborder:SetAllPoints(healthbar)
 		healthbar.bg = hpborder
 	end
@@ -52,45 +40,19 @@ function main:OnNameplateCreate(frame)
 		frame.castbar = castbar
 
 		-- castbar background
-		local bg = CreateFrame("frame", nil, castbar)
-		bg:SetFrameLevel(castbar:GetFrameLevel() - 1)
+		local bg = castbar:CreateTexture(nil, "BACKGROUND")
+		bg:SetTexture(.2, .2, .2)
 		bg:SetPoint("TOPRIGHT", 2, 2)
 		bg:SetPoint("BOTTOMLEFT", -2, -2)
-		bg:SetBackdrop({
-			edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
-			edgeSize = 8,
-			bgFile = "Interface\\Buttons\\WHITE8x8",
-			insets = {
-				top = 1,
-				bottom = 1,
-				left = 1,
-				right = 1,
-			}
-		})
-		bg:SetBackdropColor(0.137, 0.137, 0.137)
-		bg:SetBackdropBorderColor(0.2, 0.2, 0.2)
 
 		-- icon
 		cbicon:SetDrawLayer("ARTWORK")
 
 		-- icon background
-		bg = CreateFrame("Frame", nil, castbar)
-		bg:SetFrameLevel(castbar:GetFrameLevel() - 1)
+		bg = castbar:CreateTexture(nil, "BORDER")
+		bg:SetTexture(.2, .2, .2)
 		bg:SetPoint("TOPRIGHT", cbicon, 2, 2)
 		bg:SetPoint("BOTTOMLEFT", cbicon, -2, -2)
-		bg:SetBackdrop({
-			edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
-			edgeSize = 8,
-			bgFile = "Interface\\Buttons\\WHITE8x8",
-			insets = {
-				top = 1,
-				bottom = 1,
-				left = 1,
-				right = 1,
-			}
-		})
-		bg:SetBackdropColor(0.137, 0.137, 0.137)
-		bg:SetBackdropBorderColor(0.2, 0.2, 0.2)
 
 		castbar.icon = cbicon
 	end
@@ -129,11 +91,10 @@ function main:OnNameplateCreate(frame)
 	elite:SetDesaturated(true)
 
 	-- aggro background
-	threat:SetTexture("Interface\\BUTTONS\\WHITE8x8")
-	threat:ClearAllPoints()
-	threat:SetPoint("TOPRIGHT", healthbar, 2, 2)
-	threat:SetPoint("BOTTOMLEFT", healthbar, -2, -2)
-	threat:SetDrawLayer("BORDER")
+	--threat:SetTexture("Interface\\BUTTONS\\WHITE8x8")
+	--threat:ClearAllPoints()
+	--threat:SetPoint("TOPRIGHT", healthbar, 2, 2)
+	--threat:SetPoint("BOTTOMLEFT", healthbar, -2, -2)
 
 	-- misc
 	frame.highlight = highlight
@@ -154,6 +115,7 @@ function main:OnNameplateCreate(frame)
 	bossicon:SetParent(hiddenFrame)
 	cbborder:SetParent(hiddenFrame)
 	cbshield:SetParent(hiddenFrame)
+	threat:SetParent(hiddenFrame)
 
     frame:OnShow()
 	if castbar:IsShown() then castbar:OnShow() end
